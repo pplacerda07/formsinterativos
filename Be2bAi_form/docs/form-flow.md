@@ -188,9 +188,9 @@ Ao clicar no CTA final, montar **uma única string** URL-encoded e abrir `https:
 A mensagem é escrita em **primeira pessoa do lead** (porque é ele quem "envia") e funciona como briefing completo pra IA assumir a conversa já contextualizada.
 
 ```
-🚀 Oi! Sou *{nome}* e acabei de preencher o form do site. Quero testar o Be2B AI.
+Oi! Sou *{nome}* e acabei de preencher o form do site. Quero testar o Be2B AI.
 
-Segue meu briefing pra você já entrar contextualizado 👇
+Segue meu briefing pra você já entrar contextualizado:
 {siteSeExistir}
 ━━━ PERFIL ━━━
 • Cargo: {cargo}
@@ -214,10 +214,10 @@ Segue meu briefing pra você já entrar contextualizado 👇
 • Urgência: {urgencia}
 
 ━━━━━━━━━━━━━━━━━
-Pode me explicar como o Be2B funciona pro meu caso? 🙌
+Pode me explicar como o Be2B funciona pro meu caso?
 ```
 
-> **Nota pra IA (configurar no agente):** quando receber uma mensagem com esse padrão de cabeçalho `🚀 Oi! Acabei de preencher o form`, assumir que é um lead da campanha, parsear os campos e começar a conversa já personalizada pelo segmento e dor declarada.
+> **Nota pra IA (configurar no agente):** quando receber uma mensagem com esse padrão de cabeçalho `Oi! Sou *{nome}* e acabei de preencher o form do site`, assumir que é um lead da campanha, parsear os campos e começar a conversa já personalizada pelo segmento e dor declarada.
 
 **Observação técnica:**
 - Cada `\n` vira `%0A` no URL.

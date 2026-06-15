@@ -6,7 +6,7 @@ export const WHATSAPP_TARGET = "5567991776355";
 export function buildWhatsAppUrl(data: FormData): string {
   const siteLine =
     data.site && data.site.trim().length > 0
-      ? `\n🌐 ${data.site.trim()}`
+      ? `\nSite: ${data.site.trim()}`
       : "";
 
   const ferramentasStr =
@@ -15,9 +15,9 @@ export function buildWhatsAppUrl(data: FormData): string {
       : "Nenhuma informada";
 
   const message = [
-    `🚀 Oi! Sou *${data.nome}* e acabei de preencher o form do site. Quero testar o Be2B AI.`,
+    `Oi! Sou *${data.nome}* e acabei de preencher o form do site. Quero testar o Be2B AI.`,
     "",
-    "Segue meu briefing pra você já entrar contextualizado 👇",
+    "Segue meu briefing pra você já entrar contextualizado:",
     `${siteLine ? siteLine + "\n" : ""}`,
     "━━━ PERFIL ━━━",
     `• Cargo: ${data.cargo}`,
@@ -41,7 +41,7 @@ export function buildWhatsAppUrl(data: FormData): string {
     `• Urgência: ${data.urgencia}`,
     "",
     "━━━━━━━━━━━━━━━━━",
-    "Pode me explicar como o Be2B funciona pro meu caso? 🙌",
+    "Pode me explicar como o Be2B funciona pro meu caso?",
   ].join("\n");
 
   const encoded = encodeURIComponent(message);
