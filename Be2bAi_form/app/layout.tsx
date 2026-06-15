@@ -12,6 +12,9 @@ export const metadata: Metadata = {
       "Preencha 2 minutos e converse direto com a IA do Be2B.",
     type: "website",
   },
+  other: {
+    "facebook-domain-verification": "27cq8pkzzgkbrtmswv2v0rv0lobe4y",
+  },
 };
 
 export default function RootLayout({
