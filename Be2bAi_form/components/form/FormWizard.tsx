@@ -17,6 +17,7 @@ import {
   step5Schema,
 } from "@/lib/validators";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { trackLead } from "@/lib/pixel";
 import { cn } from "@/lib/utils";
 
 import { ProgressBar } from "./ProgressBar";
@@ -116,13 +117,18 @@ export function FormWizard() {
     setRedirecting(true);
     const url = buildWhatsAppUrl(fullResult.data);
 
+    trackLead({
+      content_name: "Be2B AI · Form Qualificação",
+      content_category: fullResult.data.segmento,
+    });
+
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch {}
 
     setTimeout(() => {
       window.location.href = url;
-    }, 600);
+    }, 700);
   };
 
   return (
