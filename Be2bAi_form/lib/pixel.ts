@@ -8,15 +8,16 @@ const META_PIXEL_ID = "1505740127677473";
 const PIXEL_TR_URL = "https://www.facebook.com/tr/";
 const PIXEL_VERSION = "2.9.107";
 
-interface LeadParams {
+interface EventParams {
   content_name?: string;
   content_category?: string;
+  content_id?: string;
   value?: number;
   currency?: string;
 }
 
-function generateEventId(): string {
-  return `lead-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
+function generateEventId(prefix: string): string {
+  return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
 }
 
 function getCookie(name: string): string | undefined {
@@ -37,7 +38,7 @@ function getFbc(): string | undefined {
 function buildTrackingUrl(
   eventName: string,
   eventId: string,
-  params: LeadParams
+  params: EventParams
 ): string {
   const url = new URL(PIXEL_TR_URL);
   url.searchParams.set("id", META_PIXEL_ID);
@@ -60,6 +61,9 @@ function buildTrackingUrl(
   if (params.content_category) {
     url.searchParams.set("cd[content_category]", params.content_category);
   }
+  if (params.content_id) {
+    url.searchParams.set("cd[content_id]", params.content_id);
+  }
   if (typeof params.value === "number") {
     url.searchParams.set("cd[value]", String(params.value));
   }
@@ -70,14 +74,18 @@ function buildTrackingUrl(
   return url.toString();
 }
 
-export function trackLead(params: LeadParams = {}) {
+function fireEvent(eventName: string, params: EventParams = {}) {
   if (typeof window === "undefined") return;
 
-  const eventId = generateEventId();
+  const eventId = generateEventId(eventName.toLowerCase());
+
+  if (typeof console !== "undefined") {
+    console.log(`[Be2bAi Form] Meta Pixel: ${eventName} disparado`, params);
+  }
 
   if (typeof window.fbq === "function") {
     try {
-      window.fbq("track", "Lead", params, { eventID: eventId });
+      window.fbq("track", eventName, params, { eventID: eventId });
     } catch {}
   }
 
@@ -86,16 +94,24 @@ export function trackLead(params: LeadParams = {}) {
     typeof navigator.sendBeacon === "function"
   ) {
     try {
-      const url = buildTrackingUrl("Lead", eventId, params);
+      const url = buildTrackingUrl(eventName, eventId, params);
       navigator.sendBeacon(url);
     } catch {}
   } else if (typeof window !== "undefined") {
     try {
-      const url = buildTrackingUrl("Lead", eventId, params);
+      const url = buildTrackingUrl(eventName, eventId, params);
       const img = new Image();
       img.src = url;
     } catch {}
   }
+}
+
+export function trackCompleteRegistration(params: EventParams = {}) {
+  fireEvent("CompleteRegistration", params);
+}
+
+export function trackLead(params: EventParams = {}) {
+  fireEvent("Lead", params);
 }
 
 export {};

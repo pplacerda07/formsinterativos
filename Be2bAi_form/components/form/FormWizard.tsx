@@ -17,7 +17,7 @@ import {
   step5Schema,
 } from "@/lib/validators";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
-import { trackLead } from "@/lib/pixel";
+import { trackCompleteRegistration, trackLead } from "@/lib/pixel";
 import { cn } from "@/lib/utils";
 
 import { ProgressBar } from "./ProgressBar";
@@ -117,9 +117,22 @@ export function FormWizard() {
     setRedirecting(true);
     const url = buildWhatsAppUrl(fullResult.data);
 
-    trackLead({
-      content_name: "Be2B AI · Form Qualificação",
+    trackCompleteRegistration({
+      content_name: "Be2B AI Form",
       content_category: fullResult.data.segmento,
+      content_id: `urgencia-${fullResult.data.urgencia
+        .toLowerCase()
+        .slice(0, 30)
+        .replace(/\s+/g, "-")}`,
+    });
+
+    trackLead({
+      content_name: "Be2B AI Form - Qualified",
+      content_category: fullResult.data.segmento,
+      content_id: `urgencia-${fullResult.data.urgencia
+        .toLowerCase()
+        .slice(0, 30)
+        .replace(/\s+/g, "-")}`,
     });
 
     try {
@@ -128,7 +141,7 @@ export function FormWizard() {
 
     setTimeout(() => {
       window.location.href = url;
-    }, 700);
+    }, 900);
   };
 
   return (
