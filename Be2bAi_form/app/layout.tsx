@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { MetaPixel } from "@/components/pixel/MetaPixel";
+import { MetaPixelHead, MetaPixelNoscript } from "@/components/pixel/MetaPixel";
 
 export const metadata: Metadata = {
   title: "Be2B AI · Fale com a IA que prospecta pra você",
@@ -24,8 +24,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
+      <head>
+        <MetaPixelHead />
+      </head>
       <body className="min-h-screen font-sans antialiased">
-        <MetaPixel />
+        <MetaPixelNoscript />
         {children}
       </body>
     </html>
