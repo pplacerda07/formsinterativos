@@ -8,6 +8,8 @@ const META_PIXEL_ID = "1505740127677473";
 const PIXEL_TR_URL = "https://www.facebook.com/tr/";
 const PIXEL_VERSION = "2.9.107";
 
+type TrackMethod = "track" | "trackCustom";
+
 interface EventParams {
   content_name?: string;
   content_category?: string;
@@ -74,7 +76,11 @@ function buildTrackingUrl(
   return url.toString();
 }
 
-function fireEvent(eventName: string, params: EventParams = {}) {
+function fireEvent(
+  method: TrackMethod,
+  eventName: string,
+  params: EventParams = {}
+) {
   if (typeof window === "undefined") return;
 
   const eventId = generateEventId(eventName.toLowerCase());
@@ -83,35 +89,41 @@ function fireEvent(eventName: string, params: EventParams = {}) {
     console.log(`[Be2bAi Form] Meta Pixel: ${eventName} disparado`, params);
   }
 
+  // Caminho oficial: o proprio fbq usa sendBeacon/img internamente e
+  // sobrevive a navegacao da pagina. Disparamos SO por aqui quando
+  // disponivel pra nao gerar evento duplicado.
   if (typeof window.fbq === "function") {
     try {
-      window.fbq("track", eventName, params, { eventID: eventId });
+      window.fbq(method, eventName, params, { eventID: eventId });
+      return;
     } catch {}
   }
 
-  if (
-    typeof navigator !== "undefined" &&
-    typeof navigator.sendBeacon === "function"
-  ) {
-    try {
-      const url = buildTrackingUrl(eventName, eventId, params);
+  // Fallback so quando o fbq nao carregou (ex.: script falhou no init).
+  try {
+    const url = buildTrackingUrl(eventName, eventId, params);
+    if (
+      typeof navigator !== "undefined" &&
+      typeof navigator.sendBeacon === "function"
+    ) {
       navigator.sendBeacon(url);
-    } catch {}
-  } else if (typeof window !== "undefined") {
-    try {
-      const url = buildTrackingUrl(eventName, eventId, params);
+    } else {
       const img = new Image();
       img.src = url;
-    } catch {}
-  }
+    }
+  } catch {}
 }
 
 export function trackCompleteRegistration(params: EventParams = {}) {
-  fireEvent("CompleteRegistration", params);
+  fireEvent("track", "CompleteRegistration", params);
 }
 
 export function trackLead(params: EventParams = {}) {
-  fireEvent("Lead", params);
+  fireEvent("track", "Lead", params);
+}
+
+export function trackWhatsAppLead(params: EventParams = {}) {
+  fireEvent("trackCustom", "WhatsAppLead", params);
 }
 
 export {};

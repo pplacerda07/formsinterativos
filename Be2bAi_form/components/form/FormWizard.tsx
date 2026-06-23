@@ -17,7 +17,11 @@ import {
   step5Schema,
 } from "@/lib/validators";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
-import { trackCompleteRegistration, trackLead } from "@/lib/pixel";
+import {
+  trackCompleteRegistration,
+  trackLead,
+  trackWhatsAppLead,
+} from "@/lib/pixel";
 import { cn } from "@/lib/utils";
 
 import { ProgressBar } from "./ProgressBar";
@@ -50,6 +54,7 @@ const stepFields: (keyof FormData)[][] = [
 export function FormWizard() {
   const [step, setStep] = useState(1);
   const [redirecting, setRedirecting] = useState(false);
+  const [waUrl, setWaUrl] = useState<string | null>(null);
 
   const methods = useForm<FormData>({
     resolver: zodResolver(fullFormSchema),
@@ -116,32 +121,42 @@ export function FormWizard() {
 
     setRedirecting(true);
     const url = buildWhatsAppUrl(fullResult.data);
+    setWaUrl(url);
 
+    const contentId = `urgencia-${fullResult.data.urgencia
+      .toLowerCase()
+      .slice(0, 30)
+      .replace(/\s+/g, "-")}`;
+
+    // Sinal de funil: preencheu o formulario inteiro.
     trackCompleteRegistration({
       content_name: "Be2B AI Form",
       content_category: fullResult.data.segmento,
-      content_id: `urgencia-${fullResult.data.urgencia
-        .toLowerCase()
-        .slice(0, 30)
-        .replace(/\s+/g, "-")}`,
+      content_id: contentId,
     });
 
+    // Lead qualificado padrao (otimizavel em campanha de conversao).
     trackLead({
       content_name: "Be2B AI Form - Qualified",
       content_category: fullResult.data.segmento,
-      content_id: `urgencia-${fullResult.data.urgencia
-        .toLowerCase()
-        .slice(0, 30)
-        .replace(/\s+/g, "-")}`,
+      content_id: contentId,
+    });
+
+    // Evento dedicado: lead que vai pro WhatsApp. Use este pra criar
+    // Conversao Personalizada e ver o numero limpo no Events Manager.
+    trackWhatsAppLead({
+      content_name: "Be2B AI Form - WhatsApp",
+      content_category: fullResult.data.segmento,
+      content_id: contentId,
     });
 
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch {}
 
-    setTimeout(() => {
-      window.location.href = url;
-    }, 900);
+    // Nova aba, sincrono dentro do clique pra nao ser bloqueado pelo
+    // popup blocker e pra manter o form vivo (garante o envio do evento).
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -175,6 +190,28 @@ export function FormWizard() {
               prospecta pros nossos clientes 24/7. Ele já recebeu seu briefing.
               Manda "oi" que ele assume daqui.
             </div>
+          </motion.div>
+        )}
+
+        {redirecting && waUrl && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="glass rounded-3xl p-5 sm:p-6 flex flex-col items-center gap-3 text-center"
+          >
+            <p className="text-sm text-text-primary/90 leading-relaxed">
+              Abrimos o WhatsApp em uma nova aba. Não apareceu? Toca no botão
+              abaixo.
+            </p>
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-indigo-violet px-6 py-3 text-sm font-semibold text-white shadow-glow"
+            >
+              <Bot className="h-4 w-4" />
+              Abrir conversa com a IA
+            </a>
           </motion.div>
         )}
 
