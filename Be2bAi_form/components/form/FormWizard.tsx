@@ -14,7 +14,6 @@ import {
   step2Schema,
   step3Schema,
   step4Schema,
-  step5Schema,
 } from "@/lib/validators";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import {
@@ -27,28 +26,20 @@ import { cn } from "@/lib/utils";
 import { ProgressBar } from "./ProgressBar";
 import { Button } from "@/components/ui/Button";
 import { Step1Identity } from "./steps/Step1Identity";
-import { Step2Profile } from "./steps/Step2Profile";
-import { Step3Scenario } from "./steps/Step3Scenario";
-import { Step4Pain } from "./steps/Step4Pain";
-import { Step5Commitment } from "./steps/Step5Commitment";
+import { Step2Cargo } from "./steps/Step2Cargo";
+import { Step3Gargalo } from "./steps/Step3Gargalo";
+import { Step4Urgencia } from "./steps/Step4Urgencia";
 
-const STORAGE_KEY = "be2b_form_v1";
-const TOTAL_STEPS = 5;
+const STORAGE_KEY = "be2b_form_v2";
+const TOTAL_STEPS = 4;
 
-const stepSchemas = [
-  step1Schema,
-  step2Schema,
-  step3Schema,
-  step4Schema,
-  step5Schema,
-];
+const stepSchemas = [step1Schema, step2Schema, step3Schema, step4Schema];
 
 const stepFields: (keyof FormData)[][] = [
   ["nome"],
-  ["cargo", "segmento", "tamanhoTime", "site"],
-  ["prospeccao", "volume", "ferramentas", "canal"],
-  ["gargalo", "ticket", "meta"],
-  ["investimento", "decisor", "urgencia"],
+  ["cargo"],
+  ["gargalo"],
+  ["urgencia"],
 ];
 
 export function FormWizard() {
@@ -131,14 +122,14 @@ export function FormWizard() {
     // Sinal de funil: preencheu o formulario inteiro.
     trackCompleteRegistration({
       content_name: "Be2B AI Form",
-      content_category: fullResult.data.segmento,
+      content_category: fullResult.data.cargo,
       content_id: contentId,
     });
 
     // Lead qualificado padrao (otimizavel em campanha de conversao).
     trackLead({
       content_name: "Be2B AI Form - Qualified",
-      content_category: fullResult.data.segmento,
+      content_category: fullResult.data.cargo,
       content_id: contentId,
     });
 
@@ -146,7 +137,7 @@ export function FormWizard() {
     // Conversao Personalizada e ver o numero limpo no Events Manager.
     trackWhatsAppLead({
       content_name: "Be2B AI Form - WhatsApp",
-      content_category: fullResult.data.segmento,
+      content_category: fullResult.data.cargo,
       content_id: contentId,
     });
 
@@ -168,15 +159,14 @@ export function FormWizard() {
           <AnimatePresence mode="wait">
             <motion.div key={step}>
               {step === 1 && <Step1Identity />}
-              {step === 2 && <Step2Profile />}
-              {step === 3 && <Step3Scenario />}
-              {step === 4 && <Step4Pain />}
-              {step === 5 && <Step5Commitment />}
+              {step === 2 && <Step2Cargo />}
+              {step === 3 && <Step3Gargalo />}
+              {step === 4 && <Step4Urgencia />}
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {step === 5 && (
+        {step === TOTAL_STEPS && (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -237,11 +227,11 @@ export function FormWizard() {
             type="button"
             onClick={goNext}
             disabled={redirecting}
-            className={step === 5 ? "px-8 py-4 text-base" : ""}
+            className={step === TOTAL_STEPS ? "px-8 py-4 text-base" : ""}
           >
-            {step < 5 ? (
+            {step < TOTAL_STEPS ? (
               <>
-                {step === 4 ? "Quase lá" : "Continuar"}
+                {step === TOTAL_STEPS - 1 ? "Quase lá" : "Continuar"}
                 <ArrowRight className="h-4 w-4" />
               </>
             ) : redirecting ? (
@@ -259,7 +249,7 @@ export function FormWizard() {
           </Button>
         </div>
 
-        {step === 5 && (
+        {step === TOTAL_STEPS && (
           <p className="text-center text-xs text-text-muted">
             Atendimento 100% por IA · Sem espera · Resposta na hora
           </p>
