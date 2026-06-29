@@ -9,41 +9,51 @@ const config: Config = {
     extend: {
       colors: {
         bg: {
-          base: "#0A0B1E",
-          surface: "#14152B",
-          elevated: "#1C1E3D",
+          base: "#0A0F1A",
+          surface: "#14152D",
+          elevated: "#1E2540",
         },
         primary: {
-          DEFAULT: "#4F46E5",
-          hover: "#6366F1",
+          DEFAULT: "#33E561",
+          hover: "#55CD6C",
         },
         accent: {
-          DEFAULT: "#8B5CF6",
-          soft: "#A78BFA",
+          DEFAULT: "#4AEADC",
+          soft: "#7BEAE0",
+        },
+        brand: {
+          green: "#33E561",
+          "green-soft": "#55CD6C",
+          cyan: "#4AEADC",
+          navy: "#14152D",
+          "navy-soft": "#26274275",
         },
         silver: {
           1: "#C0C5CE",
           2: "#E8EAF0",
         },
         text: {
-          primary: "#F4F4F8",
-          muted: "#8B8FA8",
+          primary: "#FCFCFC",
+          muted: "#88909B",
         },
         border: {
-          DEFAULT: "#2A2D4A",
+          DEFAULT: "#26274275",
         },
-        success: "#10B981",
-        danger: "#EF4444",
+        success: "#33E561",
+        danger: "#D9534F",
       },
       fontFamily: {
         sans: ["var(--font-geist)", "Inter", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        glow: "0 0 40px rgba(79, 70, 229, 0.18)",
-        "glow-strong": "0 0 60px rgba(139, 92, 246, 0.28)",
+        glow: "0 0 40px rgba(51, 229, 97, 0.22)",
+        "glow-strong": "0 0 60px rgba(74, 234, 220, 0.32)",
       },
       backgroundImage: {
-        "indigo-violet": "linear-gradient(135deg, #4F46E5 0%, #8B5CF6 100%)",
+        "tecdisa-green":
+          "linear-gradient(135deg, #33E561 0%, #4AEADC 100%)",
+        "tecdisa-green-soft":
+          "linear-gradient(135deg, #55CD6C 0%, #7BEAE0 100%)",
         "silver-shine":
           "linear-gradient(135deg, #C0C5CE 0%, #E8EAF0 50%, #C0C5CE 100%)",
       },

@@ -166,7 +166,7 @@ export function FormWizard() {
             animate={{ opacity: 1, y: 0 }}
             className="glass rounded-3xl p-5 sm:p-6 flex items-start gap-3"
           >
-            <div className="shrink-0 h-10 w-10 rounded-full bg-indigo-violet flex items-center justify-center shadow-glow">
+            <div className="shrink-0 h-10 w-10 rounded-full bg-tecdisa-green flex items-center justify-center shadow-glow">
               <Headset className="h-5 w-5 text-white" />
             </div>
             <div className="text-sm text-text-primary/90 leading-relaxed">
@@ -191,7 +191,7 @@ export function FormWizard() {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-indigo-violet px-6 py-3 text-sm font-semibold text-white shadow-glow"
+              className="inline-flex items-center gap-2 rounded-full bg-tecdisa-green px-6 py-3 text-sm font-semibold text-white shadow-glow"
             >
               <Headset className="h-4 w-4" />
               Falar com o time comercial

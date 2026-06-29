@@ -72,7 +72,7 @@ export function RadioCardGroup({
                   "shrink-0 flex items-center justify-center rounded-full transition-all",
                   size === "md" ? "h-5 w-5" : "h-6 w-6",
                   selected
-                    ? "bg-indigo-violet text-white"
+                    ? "bg-tecdisa-green text-white"
                     : "border border-border bg-transparent"
                 )}
               >
