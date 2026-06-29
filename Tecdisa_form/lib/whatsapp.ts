@@ -1,8 +1,8 @@
 import { FormData } from "./validators";
 import { onlyDigits } from "./utils";
 
-// Tecdisa: numero comercial oficial (https://tecdisa.com.br)
-export const WHATSAPP_TARGET = "5567999431174";
+// Tecdisa: numero comercial oficial (+55 67 9943-1174)
+export const WHATSAPP_TARGET = "556799431174";
 
 export function buildWhatsAppUrl(data: FormData): string {
   const message = [

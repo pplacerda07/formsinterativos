@@ -57,7 +57,7 @@ Tecdisa_form/
 
 1. Lead acessa, vê landing curta com 3 badges (Estoque sob controle · Força de vendas mobile · BI integrado).
 2. Preenche 4 etapas: Nome + Cargo + Gargalo + Urgência.
-3. Ao clicar no CTA final, é redirecionado pro WhatsApp `+55 67 99943-1174` em nova aba com a mensagem já pronta.
+3. Ao clicar no CTA final, é redirecionado pro WhatsApp `+55 67 9943-1174` em nova aba com a mensagem já pronta.
 4. O time comercial recebe o briefing completo formatado e dá sequência na conversa.
 
 O form salva progresso em `localStorage` (`tecdisa_form_v1`) e limpa após o envio.

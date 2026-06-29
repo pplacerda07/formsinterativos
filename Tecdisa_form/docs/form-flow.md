@@ -12,7 +12,7 @@
 
 | Regra | Definição |
 |---|---|
-| **Destino do form** | WhatsApp `+55 67 99943-1174` (comercial da Tecdisa) |
+| **Destino do form** | WhatsApp `+55 67 9943-1174` (comercial da Tecdisa) |
 | **Redirect** | `window.open` em nova aba ao concluir Etapa 4 |
 | **Pixel da Meta** | ID placeholder `0000000000000000` (substituir em `lib/pixel.ts` e `components/pixel/MetaPixel.tsx`) |
 | **Eventos disparados** | `CompleteRegistration`, `Lead`, `WhatsAppLead` (custom) |
