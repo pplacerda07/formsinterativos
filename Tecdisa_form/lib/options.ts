@@ -15,7 +15,6 @@ export const gargaloOptions: Option[] = [
   { value: "Vendedor sem app", label: "Vendedores ainda anotam pedido na mão / planilha", emoji: "📝" },
   { value: "Financeiro no escuro", label: "Sem visibilidade do financeiro e inadimplência", emoji: "💸" },
   { value: "Separacao sem padrao", label: "Separação e conferência sem padronização", emoji: "🧹" },
-  { value: "Cobranca manual", label: "Cobrança manual / WhatsApp desorganizado", emoji: "📞" },
   { value: "Sistema atual ruim", label: "Sistema atual trava / é lento / não atende mais", emoji: "🐌" },
   { value: "Sem e-commerce B2B", label: "Não tenho e-commerce B2B pros meus clientes", emoji: "🛒" },
   { value: "Decidir no escuro", label: "Falta relatório, decido tudo no feeling", emoji: "🎲" },

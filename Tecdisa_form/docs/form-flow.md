@@ -54,7 +54,6 @@ Dores específicas de quem opera distribuidora e precisa de um ERP melhor.
 - 📝 Vendedores ainda anotam pedido na mão / planilha
 - 💸 Sem visibilidade do financeiro e inadimplência
 - 🧹 Separação e conferência sem padronização
-- 📞 Cobrança manual / WhatsApp desorganizado
 - 🐌 Sistema atual trava / é lento / não atende mais
 - 🛒 Não tenho e-commerce B2B pros meus clientes
 - 🎲 Falta relatório, decido tudo no feeling
