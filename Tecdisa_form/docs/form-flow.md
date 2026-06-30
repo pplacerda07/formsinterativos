@@ -14,7 +14,7 @@
 |---|---|
 | **Destino do form** | WhatsApp `+55 67 9943-1174` (comercial da Tecdisa) |
 | **Redirect** | `window.open` em nova aba ao concluir Etapa 4 |
-| **Pixel da Meta** | `1916465765462262` (WPP Tecdisa Teste) |
+| **Pixel da Meta** | `3157325024658092` (leads tecdisa) |
 | **Eventos disparados** | `CompleteRegistration`, `Lead`, `WhatsAppLead` (custom) |
 | **Validação** | zod + react-hook-form, por etapa |
 | **Persistência** | `localStorage` (`tecdisa_form_v1`) |
@@ -110,7 +110,7 @@ Todos com:
 
 ## ⚠️ TODO ANTES DE PUBLICAR EM PRODUÇÃO
 
-1. ✅ **Pixel da Meta**: já configurado (`1916465765462262` em `lib/pixel.ts` + `components/pixel/MetaPixel.tsx`)
+1. ✅ **Pixel da Meta**: já configurado (`3157325024658092` em `lib/pixel.ts` + `components/pixel/MetaPixel.tsx`)
 2. **Verificar o domínio** no Business Manager e colar a meta tag em `app/layout.tsx` (`metadata.other`)
 3. **Criar logo PNG** em `public/logo.png` se quiser substituir o texto do componente `Logo`
 4. **Deploy na Vercel** com Root Directory apontando pra `Tecdisa_form/`

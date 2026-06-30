@@ -4,9 +4,9 @@ declare global {
   }
 }
 
-// Pixel da Meta "WPP Tecdisa Teste" (ID 1916465765462262).
+// Pixel da Meta "leads tecdisa" (ID 3157325024658092).
 // Mesmo lugar pra trocar: components/pixel/MetaPixel.tsx (META_PIXEL_ID)
-const META_PIXEL_ID = "1916465765462262";
+const META_PIXEL_ID = "3157325024658092";
 const PIXEL_TR_URL = "https://www.facebook.com/tr/";
 const PIXEL_VERSION = "2.9.107";
 

@@ -66,7 +66,7 @@ O form salva progresso em `localStorage` (`tecdisa_form_v1`) e limpa após o env
 
 ### 1. Pixel da Meta (configurado)
 
-Pixel `WPP Tecdisa Teste` · ID `1916465765462262`. Já está nos 2 arquivos:
+Pixel `leads tecdisa` · ID `3157325024658092`. Já está nos 2 arquivos:
 
 - `lib/pixel.ts` (constante `META_PIXEL_ID` no topo)
 - `components/pixel/MetaPixel.tsx` (constante `META_PIXEL_ID`)

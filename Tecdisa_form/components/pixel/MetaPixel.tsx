@@ -1,6 +1,6 @@
-// Pixel da Meta "WPP Tecdisa Teste" (ID 1916465765462262).
+// Pixel da Meta "leads tecdisa" (ID 3157325024658092).
 // Mesmo lugar pra trocar: lib/pixel.ts (META_PIXEL_ID interno)
-export const META_PIXEL_ID = "1916465765462262";
+export const META_PIXEL_ID = "3157325024658092";
 
 const PIXEL_SCRIPT = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '${META_PIXEL_ID}');fbq('track', 'PageView');`;
 
