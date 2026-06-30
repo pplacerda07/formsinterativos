@@ -4,9 +4,9 @@ declare global {
   }
 }
 
-// TODO Tecdisa: substituir pelo ID real do Pixel da Tecdisa quando estiver criado.
+// Pixel da Meta "WPP Tecdisa Teste" (ID 1916465765462262).
 // Mesmo lugar pra trocar: components/pixel/MetaPixel.tsx (META_PIXEL_ID)
-const META_PIXEL_ID = "0000000000000000";
+const META_PIXEL_ID = "1916465765462262";
 const PIXEL_TR_URL = "https://www.facebook.com/tr/";
 const PIXEL_VERSION = "2.9.107";
 

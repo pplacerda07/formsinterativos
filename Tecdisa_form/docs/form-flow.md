@@ -14,7 +14,7 @@
 |---|---|
 | **Destino do form** | WhatsApp `+55 67 9943-1174` (comercial da Tecdisa) |
 | **Redirect** | `window.open` em nova aba ao concluir Etapa 4 |
-| **Pixel da Meta** | ID placeholder `0000000000000000` (substituir em `lib/pixel.ts` e `components/pixel/MetaPixel.tsx`) |
+| **Pixel da Meta** | `1916465765462262` (WPP Tecdisa Teste) |
 | **Eventos disparados** | `CompleteRegistration`, `Lead`, `WhatsAppLead` (custom) |
 | **Validação** | zod + react-hook-form, por etapa |
 | **Persistência** | `localStorage` (`tecdisa_form_v1`) |
@@ -111,10 +111,8 @@ Todos com:
 
 ## ⚠️ TODO ANTES DE PUBLICAR EM PRODUÇÃO
 
-1. **Criar Pixel da Meta** no Business Manager da Tecdisa
-2. **Substituir** `META_PIXEL_ID = "0000000000000000"` em:
-   - `lib/pixel.ts`
-   - `components/pixel/MetaPixel.tsx`
-3. **Verificar o domínio** no Business Manager e colar a meta tag em `app/layout.tsx` (`metadata.other`)
-4. **Criar logo PNG** em `public/logo.png` se quiser substituir o texto metálico do componente `Logo`
-5. **Deploy na Vercel** com Root Directory apontando pra `Tecdisa_form/`
+1. ✅ **Pixel da Meta**: já configurado (`1916465765462262` em `lib/pixel.ts` + `components/pixel/MetaPixel.tsx`)
+2. **Verificar o domínio** no Business Manager e colar a meta tag em `app/layout.tsx` (`metadata.other`)
+3. **Criar logo PNG** em `public/logo.png` se quiser substituir o texto do componente `Logo`
+4. **Deploy na Vercel** com Root Directory apontando pra `Tecdisa_form/`
+5. Depois de subir, **configurar evento prioritário (AEM)** no Events Manager com `Lead` ou `CompleteRegistration` no slot 1

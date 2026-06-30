@@ -64,12 +64,14 @@ O form salva progresso em `localStorage` (`tecdisa_form_v1`) e limpa após o env
 
 ## ⚠️ ANTES DE COLOCAR EM PRODUÇÃO
 
-### 1. Substituir o Pixel ID
+### 1. Pixel da Meta (configurado)
 
-O Pixel está com placeholder `0000000000000000`. Troque em DOIS arquivos:
+Pixel `WPP Tecdisa Teste` · ID `1916465765462262`. Já está nos 2 arquivos:
 
 - `lib/pixel.ts` (constante `META_PIXEL_ID` no topo)
 - `components/pixel/MetaPixel.tsx` (constante `META_PIXEL_ID`)
+
+Se precisar trocar pra outro Pixel no futuro, é só editar esses 2 arquivos.
 
 ### 2. Verificar o domínio (após deploy)
 
