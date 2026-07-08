@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    background: #FDFBF7;
+    color: #4A4040;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(232, 118, 118, 0.25);
+    color: #4A4040;
+  }
+}
+
+@layer components {
+  .glass {
+    background: #FFFFFF;
+    border: 1px solid rgba(244, 156, 156, 0.3);
+    box-shadow: 0 8px 24px rgba(232, 118, 118, 0.1);
+    border-radius: 12px;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #E87676 0%, #ED6161 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #F49C9C;
+    border-radius: 3px;
+  }
+}
