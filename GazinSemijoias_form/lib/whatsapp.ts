@@ -1,8 +1,8 @@
 import { FormData } from "./validators";
 import { onlyDigits } from "./utils";
 
-// GazinSemijoias: numero comercial (TODO: preencher o número real)
-export const WHATSAPP_TARGET = "5500000000000";
+// GazinSemijoias: numero comercial
+export const WHATSAPP_TARGET = "5567992487358"; // 55 + 67 + 992487358
 
 export function buildWhatsAppUrl(data: FormData): string {
   const message = [
@@ -17,5 +17,5 @@ export function buildWhatsAppUrl(data: FormData): string {
   ].join("\n");
 
   const encoded = encodeURIComponent(message);
-  return `https://wa.me/${onlyDigits(WHATSAPP_TARGET)}?text=${encoded}`;
+  return `https://api.whatsapp.com/send?phone=${onlyDigits(WHATSAPP_TARGET)}&text=${encoded}`;
 }
