@@ -5,7 +5,7 @@ declare global {
 }
 
 // Pixel da Meta GazinSemijoias
-const META_PIXEL_ID = "987607864099807";
+const META_PIXEL_ID = "1581417306734824";
 const PIXEL_TR_URL = "https://www.facebook.com/tr/";
 const PIXEL_VERSION = "2.9.107";
 
