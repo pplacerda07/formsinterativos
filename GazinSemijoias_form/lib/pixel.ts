@@ -4,8 +4,8 @@ declare global {
   }
 }
 
-// Pixel da Meta GazinSemijoias (TODO: substituir pelo ID real)
-const META_PIXEL_ID = "000000000000000";
+// Pixel da Meta GazinSemijoias
+const META_PIXEL_ID = "987607864099807";
 const PIXEL_TR_URL = "https://www.facebook.com/tr/";
 const PIXEL_VERSION = "2.9.107";
 
