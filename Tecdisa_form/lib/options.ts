@@ -20,6 +20,17 @@ export const gargaloOptions: Option[] = [
   { value: "Decidir no escuro", label: "Falta relatório, decido tudo no feeling", emoji: "🎲" },
 ];
 
+export const segmentoOptions: Option[] = [
+  { value: "Cosméticos / Beleza", label: "Cosméticos / Beleza", emoji: "💄" },
+  { value: "Pet", label: "Pet (ração, acessórios, veterinário)", emoji: "🐾" },
+  { value: "Higiene e Limpeza", label: "Higiene e Limpeza", emoji: "🧴" },
+  { value: "Produtos Naturais", label: "Produtos Naturais / Saudáveis", emoji: "🌿" },
+  { value: "Alimentos e Bebidas", label: "Alimentos e Bebidas", emoji: "🍔" },
+  { value: "Farmacêutico", label: "Farmacêutico", emoji: "💊" },
+  { value: "Material de Construção", label: "Material de Construção", emoji: "🏗️" },
+  { value: "Outro", label: "Outro segmento", emoji: "📦" },
+];
+
 export const urgenciaOptions: Option[] = [
   { value: "Tô perdendo dinheiro", label: "Tô perdendo dinheiro com isso, preciso AGORA", emoji: "🔥" },
   { value: "Próximos 30 dias", label: "Quero implantar nos próximos 30 dias", emoji: "⚡" },

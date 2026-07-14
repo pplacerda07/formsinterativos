@@ -12,6 +12,10 @@ export const step2Schema = z.object({
   cargo: z.string().min(1, "Selecione seu cargo"),
 });
 
+export const stepSegmentoSchema = z.object({
+  segmento: z.string().min(1, "Selecione o segmento"),
+});
+
 export const step3Schema = z.object({
   gargalo: z.string().min(1, "Selecione seu maior gargalo"),
 });
@@ -22,6 +26,7 @@ export const step4Schema = z.object({
 
 export const fullFormSchema = step1Schema
   .merge(step2Schema)
+  .merge(stepSegmentoSchema)
   .merge(step3Schema)
   .merge(step4Schema);
 
@@ -30,6 +35,8 @@ export type FormData = z.infer<typeof fullFormSchema>;
 export const defaultValues: FormData = {
   nome: "",
   cargo: "",
+  segmento: "",
   gargalo: "",
   urgencia: "",
 };
+

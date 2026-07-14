@@ -10,6 +10,7 @@ export function buildWhatsAppUrl(data: FormData): string {
     "",
     "Resumo rápido:",
     `• Cargo: ${data.cargo}`,
+    `• Segmento: ${data.segmento}`,
     `• Maior gargalo: ${data.gargalo}`,
     `• Urgência: ${data.urgencia}`,
     "",

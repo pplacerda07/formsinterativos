@@ -12,6 +12,7 @@ import {
   fullFormSchema,
   step1Schema,
   step2Schema,
+  stepSegmentoSchema,
   step3Schema,
   step4Schema,
 } from "@/lib/validators";
@@ -27,17 +28,19 @@ import { ProgressBar } from "./ProgressBar";
 import { Button } from "@/components/ui/Button";
 import { Step1Identity } from "./steps/Step1Identity";
 import { Step2Cargo } from "./steps/Step2Cargo";
+import { StepSegmento } from "./steps/StepSegmento";
 import { Step3Gargalo } from "./steps/Step3Gargalo";
 import { Step4Urgencia } from "./steps/Step4Urgencia";
 
 const STORAGE_KEY = "tecdisa_form_v1";
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 5;
 
-const stepSchemas = [step1Schema, step2Schema, step3Schema, step4Schema];
+const stepSchemas = [step1Schema, step2Schema, stepSegmentoSchema, step3Schema, step4Schema];
 
 const stepFields: (keyof FormData)[][] = [
   ["nome"],
   ["cargo"],
+  ["segmento"],
   ["gargalo"],
   ["urgencia"],
 ];
@@ -154,8 +157,9 @@ export function FormWizard() {
             <motion.div key={step}>
               {step === 1 && <Step1Identity />}
               {step === 2 && <Step2Cargo />}
-              {step === 3 && <Step3Gargalo />}
-              {step === 4 && <Step4Urgencia />}
+              {step === 3 && <StepSegmento />}
+              {step === 4 && <Step3Gargalo />}
+              {step === 5 && <Step4Urgencia />}
             </motion.div>
           </AnimatePresence>
         </div>
