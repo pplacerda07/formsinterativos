@@ -126,4 +126,32 @@ export function trackWhatsAppLead(params: EventParams = {}) {
   fireEvent("trackCustom", "WhatsAppLead", params);
 }
 
+/** Início do form — usuário avançou o Step 1 com nome preenchido */
+export function trackInicioForm() {
+  fireEvent("trackCustom", "inicio_form");
+}
+
+// ── AJUSTE OS CRITÉRIOS DE QUALIFICAÇÃO AQUI ──────────────────
+// Altere estas listas para controlar quando o evento Lead dispara.
+// O Lead só dispara se cargo ∈ CARGOS_DECISOR E urgencia ∈ URGENCIAS_QUENTES.
+const CARGOS_DECISOR = [
+  "Dono / Sócio",
+  "Diretor Comercial / CCO",
+  "Gerente Comercial",
+];
+
+const URGENCIAS_QUENTES = [
+  "Tô perdendo deal, preciso agora",
+  "Próximos 30 dias",
+];
+// ── FIM DOS CRITÉRIOS ─────────────────────────────────────────
+
+/**
+ * Retorna true se o lead é considerado qualificado para o evento Lead.
+ * Critério: cargo de decisor E urgência alta/média.
+ */
+export function isLeadQualificado(cargo: string, urgencia: string): boolean {
+  return CARGOS_DECISOR.includes(cargo) && URGENCIAS_QUENTES.includes(urgencia);
+}
+
 export {};

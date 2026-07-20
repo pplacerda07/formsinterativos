@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
@@ -18,8 +18,10 @@ import {
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import {
   trackCompleteRegistration,
+  trackInicioForm,
   trackLead,
   trackWhatsAppLead,
+  isLeadQualificado,
 } from "@/lib/pixel";
 import { cn } from "@/lib/utils";
 
@@ -46,6 +48,7 @@ export function FormWizard() {
   const [step, setStep] = useState(1);
   const [redirecting, setRedirecting] = useState(false);
   const [waUrl, setWaUrl] = useState<string | null>(null);
+  const inicioFormFired = useRef(false);
 
   const methods = useForm<FormData>({
     resolver: zodResolver(fullFormSchema),
@@ -90,6 +93,12 @@ export function FormWizard() {
       return;
     }
 
+    // Dispara inicio_form uma unica vez ao avancar o Step 1 com nome valido.
+    if (step === 1 && !inicioFormFired.current) {
+      inicioFormFired.current = true;
+      trackInicioForm();
+    }
+
     if (step < TOTAL_STEPS) {
       setStep(step + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -126,28 +135,40 @@ export function FormWizard() {
       content_id: contentId,
     });
 
-    // Lead qualificado padrao (otimizavel em campanha de conversao).
-    trackLead({
-      content_name: "Be2B AI Form - Qualified",
-      content_category: fullResult.data.cargo,
-      content_id: contentId,
-    });
-
-    // Evento dedicado: lead que vai pro WhatsApp. Use este pra criar
-    // Conversao Personalizada e ver o numero limpo no Events Manager.
-    trackWhatsAppLead({
-      content_name: "Be2B AI Form - WhatsApp",
-      content_category: fullResult.data.cargo,
-      content_id: contentId,
-    });
+    // Lead qualificado — dispara SOMENTE se o lead atende os criterios.
+    // Ajuste os criterios em lib/pixel.ts (CARGOS_DECISOR / URGENCIAS_QUENTES).
+    if (isLeadQualificado(fullResult.data.cargo, fullResult.data.urgencia)) {
+      trackLead({
+        content_name: "Be2B AI Form - Qualified",
+        content_category: fullResult.data.cargo,
+        content_id: contentId,
+      });
+    }
 
     try {
       localStorage.removeItem(STORAGE_KEY);
     } catch {}
+  };
 
-    // Nova aba, sincrono dentro do clique pra nao ser bloqueado pelo
-    // popup blocker e pra manter o form vivo (garante o envio do evento).
-    window.open(url, "_blank", "noopener,noreferrer");
+  /** Dispara WhatsAppLead e abre o WhatsApp. Usado no botao da tela final. */
+  const handleWhatsAppClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!waUrl) return;
+
+    const values = methods.getValues();
+    const contentId = `urgencia-${values.urgencia
+      .toLowerCase()
+      .slice(0, 30)
+      .replace(/\s+/g, "-")}`;
+
+    trackWhatsAppLead({
+      content_name: "Be2B AI Form - WhatsApp",
+      content_category: values.cargo,
+      content_id: contentId,
+    });
+
+    // fbq usa sendBeacon internamente — sobrevive a navegacao.
+    window.open(waUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -190,13 +211,14 @@ export function FormWizard() {
             className="glass rounded-3xl p-5 sm:p-6 flex flex-col items-center gap-3 text-center"
           >
             <p className="text-sm text-text-primary/90 leading-relaxed">
-              Abrimos o WhatsApp em uma nova aba. Não apareceu? Toca no botão
-              abaixo.
+              Pronto! Clica no botão abaixo pra abrir o WhatsApp e falar com a
+              IA.
             </p>
             <a
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleWhatsAppClick}
               className="inline-flex items-center gap-2 rounded-full bg-indigo-violet px-6 py-3 text-sm font-semibold text-white shadow-glow"
             >
               <Bot className="h-4 w-4" />

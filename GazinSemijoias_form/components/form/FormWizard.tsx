@@ -20,6 +20,7 @@ import {
   trackCompleteRegistration,
   trackLead,
   trackWhatsAppLead,
+  trackInicioForm,
 } from "@/lib/pixel";
 import { cn } from "@/lib/utils";
 
@@ -71,6 +72,12 @@ export function FormWizard() {
     });
     return () => sub.unsubscribe();
   }, [methods]);
+
+  useEffect(() => {
+    trackInicioForm({
+      content_name: "GazinSemijoias Form - Inicio",
+    });
+  }, []);
 
   const goNext = async () => {
     const values = methods.getValues();

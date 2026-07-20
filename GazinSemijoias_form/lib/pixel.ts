@@ -123,4 +123,8 @@ export function trackWhatsAppLead(params: EventParams = {}) {
   fireEvent("trackCustom", "WhatsAppLead", params);
 }
 
+export function trackInicioForm(params: EventParams = {}) {
+  fireEvent("trackCustom", "InicioForm", params);
+}
+
 export {};
